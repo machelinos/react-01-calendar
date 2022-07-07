@@ -4,7 +4,8 @@ import { CalendarApp } from './CalendarApp'
 import './styles.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // React strict mode disabled while waiting for react-big-calendar update
+  // <React.StrictMode>
     <CalendarApp />
-  </React.StrictMode>
+  // </React.StrictMode>
 )
