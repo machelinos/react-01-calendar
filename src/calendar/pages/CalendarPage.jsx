@@ -1,9 +1,9 @@
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
+import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import { addHours } from 'date-fns';
 
-import { NavBar } from "../"
+import { NavBar, CalendarEvent } from "../"
 import { getMessages, localizer } from '../../helpers';
 
 const events = [
@@ -21,8 +21,6 @@ const events = [
 
 export const CalendarPage = () => {
   const eventStyleGetter = (event, start, end, isSelected ) => {
-    console.log({ event, start, end, isSelected });
-
     const style = {
       backgroundColor: '#347cf7',
       borderRadius: '0px',
@@ -40,6 +38,9 @@ export const CalendarPage = () => {
       <NavBar />
 
       <Calendar
+      components={ {
+        event: CalendarEvent
+      } }
       localizer={localizer}
       events={events}
       startAccessor="start"
