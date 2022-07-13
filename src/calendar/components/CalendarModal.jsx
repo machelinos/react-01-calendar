@@ -8,6 +8,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 import { addHours, differenceInSeconds } from "date-fns";
 import es from 'date-fns/locale/es';
+import { useUiStore } from "../../hooks";
 registerLocale('es', es);
 setDefaultLocale('es');
 
@@ -25,7 +26,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export const CalendarModal = () => {
-    const [isOpenModal, setIsOpenModal] = useState(true);
+    const { isModalOpen, closeModal } = useUiStore();
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [formValues, setFormValues] = useState({
         title: 'Joy',
@@ -55,7 +56,7 @@ export const CalendarModal = () => {
     }
 
     const onCloseModal = () => {
-        setIsOpenModal(false);
+        closeModal();
     }
 
     const onSubmit = (event) => {
@@ -83,7 +84,7 @@ export const CalendarModal = () => {
     <Modal
         className='modal'
         closeTimeoutMS={200}
-        isOpen={isOpenModal}
+        isOpen={isModalOpen}
         onRequestClose={onCloseModal}
         style={customStyles}
         overlayClassName='modal-fondo'
