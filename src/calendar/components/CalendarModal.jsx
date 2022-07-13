@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Modal from "react-modal";
 import DatePicker, { registerLocale, setDefaultLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,7 +8,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 import { addHours, differenceInSeconds } from "date-fns";
 import es from 'date-fns/locale/es';
-import { useUiStore } from "../../hooks";
+import { useCalendarStore, useUiStore } from "../../hooks";
 registerLocale('es', es);
 setDefaultLocale('es');
 
@@ -26,6 +26,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export const CalendarModal = () => {
+    const { activeEvent } = useCalendarStore();
     const { isModalOpen, closeModal } = useUiStore();
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [formValues, setFormValues] = useState({
@@ -40,6 +41,13 @@ export const CalendarModal = () => {
 
         return formValues.title.length > 0 ? '' : 'is-invalid';
     }, [formValues.title, isFormSubmitted]);
+
+    useEffect(() => {
+        if(activeEvent!== null){
+            setFormValues({...activeEvent});
+        }
+    }, [activeEvent]);
+    
 
     const onInputChanged = ({target}) => {
         setFormValues({
