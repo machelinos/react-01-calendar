@@ -87,7 +87,6 @@ export const CalendarModal = () => {
         startSavingEvent(formValues);
         closeModal();
         setIsFormSubmitted(false);
-        // TO DO: Close modal
         // TO DO: Remove errors
     }
 
