@@ -32,8 +32,12 @@ export const calendarSlice = createSlice({
         const eventIndex = state.events.findIndex(event=>event._id===state.activeEvent._id);
         state.events[eventIndex] = payload;
         state.activeEvent = null;
+      },
+      onDeleteEvent: (state) => {
+        state.events = state.events.filter(event=>event._id!==state.activeEvent._id);
+        state.activeEvent = null;
       }
     }
 });
 
-export const { onSetActiveEvent, onAddNewEvent, onEditEvent } = calendarSlice.actions;
+export const { onSetActiveEvent, onAddNewEvent, onEditEvent, onDeleteEvent } = calendarSlice.actions;

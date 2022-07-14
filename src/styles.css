@@ -48,3 +48,8 @@
   position: absolute;
   right: 25px;
 }
+
+.fab--delete {
+  left: 25px;
+  right: auto;
+}
