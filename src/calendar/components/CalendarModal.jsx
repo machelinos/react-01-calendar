@@ -26,7 +26,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export const CalendarModal = () => {
-    const { activeEvent } = useCalendarStore();
+    const { activeEvent, startSavingEvent } = useCalendarStore();
     const { isModalOpen, closeModal } = useUiStore();
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [formValues, setFormValues] = useState({
@@ -84,6 +84,9 @@ export const CalendarModal = () => {
             return;
         }
 
+        startSavingEvent(formValues);
+        closeModal();
+        setIsFormSubmitted(false);
         // TO DO: Close modal
         // TO DO: Remove errors
     }
